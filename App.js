@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, React } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Cookbook from "./Cookbook.js";
 
 const Home = () => {
   return (
@@ -19,13 +20,13 @@ const Pantry = () => {
   );
 };
 
-const Cookbook = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Cookbook</Text>
-    </View>
-  );
-};
+// const Cookbook = () => {
+//   return (
+//     <View style={styles.container}>
+//       <Text>Cookbook</Text>
+//     </View>
+//   );
+// };
 
 const Tab = createBottomTabNavigator();
 
@@ -52,7 +53,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  view: {
+  container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
