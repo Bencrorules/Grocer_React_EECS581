@@ -1,3 +1,4 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,14 +20,6 @@ const Pantry = () => {
     </View>
   );
 };
-
-// const Cookbook = () => {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Cookbook</Text>
-//     </View>
-//   );
-// };
 
 const Tab = createBottomTabNavigator();
 
