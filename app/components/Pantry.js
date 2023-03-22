@@ -12,9 +12,13 @@ const FindScreen = ({navigation}) => {
     const [editItem, seteditItem] = useState();
     var entryIndex = '';
 
+    //Called when you touch the "+" button to add an ingredient to the Pantry
     const handleAddIngredient = () => {
+        //Collapsing the keyboard once user has added the ingredient
         Keyboard.dismiss();
+        //Sets state variable IngredientItems (above) 
         setIngredientItems([...ingredientItems, ingredient])
+        //Sest state variable setIngredient (above), to null
         setIngredient(null);
     }
 
@@ -81,7 +85,9 @@ const FindScreen = ({navigation}) => {
             keyboardShouldPersistTaps='handled'
         >
             <View style={styles.ingredientsWrapper}>
+              {/*This begins the list part of the page, which loads empty right now, but will (eventually) populate with users ingredients*/}
                 <Text style={styles.sectionTitle}>Your Ingredients:</Text>
+
                 <View style={styles.items}>
                 {
                     ingredientItems.map((item, index) => {
@@ -95,12 +101,22 @@ const FindScreen = ({navigation}) => {
                 </View>
             </View>
         </ScrollView>
-
+        {/*View displaying the textbox to "Add an ingredient" and the "+" button to actually add the ingredient to the Pantry*/}
         <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.writeIngredientWrapper}
+            keyboardVerticalOffset={110}
         >
+            {/*
+                Following is where you enter the name of the ingredient you'd like to add to your pantry 
+                Cannot see value since keyboard is blocking
+                onChangeText calls setIngredient when text is changed, which will update the state
+            */}
             <TextInput style={styles.input} placeholder={'Add an ingredient'} value={ingredient} onChangeText={text => setIngredient(text)} />
+            {/* 
+                Add to list button 
+                Will add an ingredient to the list when pressed (handleAddIngredient, below)
+            */}
             <TouchableOpacity onPress={() => handleAddIngredient()}>
             <View style={styles.addWrapper}>
                 <Text style={styles.addText}>+</Text>

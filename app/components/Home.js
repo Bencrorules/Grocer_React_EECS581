@@ -56,12 +56,14 @@ const FindScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
+          {/* Following Modal is the prompt that appears when pressing a list element on the Pantry page or the home page */}
           <Modal
             animationType='fade'
             visible={isModalVisible}
             onRequestClose={() => setisModalVisible(false)}
           >
             <View style = {styles.modalView}>
+                {/* text that's showing up with prompt that appears when you click on an item */}
                 <Text style = {styles.text}>Change Text: </Text>
                 <TextInput 
                     style = {styles.textInput}
@@ -75,6 +77,7 @@ const FindScreen = ({navigation}) => {
                     onPress={() => onPressSaveEdit()}
                     style={styles.touchableSave}
                 >
+                    {/* text that's showing up with prompt that appears when you click on an item */}
                     <Text style={styles.text}>Save</Text>
                 </TouchableOpacity>
             </View>
@@ -104,6 +107,7 @@ const FindScreen = ({navigation}) => {
         <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.writeIngredientWrapper}
+            keyboardVerticalOffset={110}
         >
             <TextInput style={styles.input} placeholder={'Add an ingredient'} value={ingredient} onChangeText={text => setIngredient(text)} />
             <TouchableOpacity onPress={() => handleAddIngredient()}>
