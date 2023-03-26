@@ -24,24 +24,28 @@ const FindScreen = ({ navigation }) => {
   const [recipeName, setRecipeName] = useState();
   var entryIndex = "";
 
+  // Adds recipe to Cookbook
   const addRecipe = () => {
     Keyboard.dismiss();
     setRecipeItems([...recipeItems, recipe]);
     setRecipe(null);
   };
 
+  // Handles updates to modal
   const recipeInfo = (index, item) => {
     entryIndex = index;
     setisModalVisible(true);
     setRecipeName(item);
   };
 
+  // Closes modal
   const closeModal = () => {
     setisModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
+      {/* Modal component that displays Recipe name and info*/}
       <Modal
         animationType="fade"
         visible={isModalVisible}
@@ -52,6 +56,7 @@ const FindScreen = ({ navigation }) => {
           <View style={styles.modalContainer}>
             <Text style={styles.modalText}>{recipeName} </Text>
             <Text style={styles.otherText}>Recipe Info</Text>
+            {/* Press to close modal */}
             <TouchableOpacity
               style={styles.button}
               onPress={() => closeModal()}
@@ -61,12 +66,15 @@ const FindScreen = ({ navigation }) => {
           </View>
         </View>
       </Modal>
+
+      {/*Default view for Cookbook */}
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.recipeWrapper}>
           <Text style={styles.sectionTitle}>Recipes:</Text>
           <View style={styles.items}>
             {recipeItems.map((item, index) => {
               return (
+                // Press to display Recipe info
                 <TouchableOpacity
                   key={index}
                   onPress={() => recipeInfo(index, item)}
@@ -79,17 +87,20 @@ const FindScreen = ({ navigation }) => {
         </View>
       </ScrollView>
 
+      {/* View that adds Recipe to Cookbook*/}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.writeRecipeWrapper}
         keyboardVerticalOffset={110}
       >
+        {/* Enter Recipe name via keyboard */}
         <TextInput
           style={styles.input}
           placeholder={"Add a Recipe"}
           value={recipe}
           onChangeText={(text) => setRecipe(text)}
         />
+        {/* Press '+' to add Recipe to Cookbook */}
         <TouchableOpacity onPress={() => addRecipe()}>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}>+</Text>
