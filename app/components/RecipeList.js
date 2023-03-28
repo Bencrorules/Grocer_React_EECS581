@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import RecipeItem from './RecipeItem';
+import RecipeItem from './AddRecipe';
 
 const RecipeList = ({ recipes, navigation }) => {
   const renderRecipeItem = (itemData) => {
@@ -18,15 +18,7 @@ const RecipeList = ({ recipes, navigation }) => {
 
   return (
     <View style={styles.container}>
-      {recipes.length > 0 ? (
-        <FlatList
-          data={recipes}
-          renderItem={renderRecipeItem}
-          keyExtractor={(item) => item.id}
-        />
-      ) : (
-        <Text style={styles.noRecipes}>No recipes found. Add a recipe!</Text>
-      )}
+      <Text style={styles.noRecipes}>No recipes found. Add a recipe!</Text>
     </View>
   );
 };

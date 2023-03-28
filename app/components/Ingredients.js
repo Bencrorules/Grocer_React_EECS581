@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
 
-const Ingredients = () => {
+const Ingredients = ({ navigation }) => {
   const [sortOption, setSortOption] = useState('recent');
-  const ingredients = useSelector(state => state.ingredients.ingredients);
+  const [ingredients, setIngredients] = useState([]);
 
   const sortedIngredients = ingredients.slice().sort((a, b) => {
     if (sortOption === 'recent') {
@@ -18,7 +17,6 @@ const Ingredients = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Ingredients</Text>
       <View style={styles.sortOptions}>
         <TouchableOpacity
           style={[styles.sortOptionButton, sortOption === 'recent' && styles.activeSortOptionButton]}
@@ -40,8 +38,8 @@ const Ingredients = () => {
         </TouchableOpacity>
       </View>
       {sortedIngredients.length > 0 ? (
-        sortedIngredients.map(ingredient => (
-          <View key={ingredient.id} style={styles.ingredient}>
+        sortedIngredients.map((ingredient, index) => (
+          <View key={index} style={styles.ingredient}>
             <Text>{ingredient.name}</Text>
             <Text>{ingredient.amount}</Text>
           </View>
@@ -49,6 +47,12 @@ const Ingredients = () => {
       ) : (
         <Text style={styles.noIngredients}>You haven't added any ingredients yet.</Text>
       )}
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate('AddIngredient')}
+      >
+        <Text style={styles.addButtonText}>Add Ingredient</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -88,6 +92,18 @@ const styles = StyleSheet.create({
   },
   noIngredients: {
     fontStyle: 'italic',
+  },
+  addButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 4,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginTop: 16,
+  },
+  addButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

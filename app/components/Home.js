@@ -3,12 +3,29 @@ import { Text, View, Button, Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications'; */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+
+const useFavoriteRecipes = () => {
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+  const addFavoriteRecipe = (recipe) => {
+    setFavoriteRecipes([...favoriteRecipes, recipe]);
+  };
+
+  const removeFavoriteRecipe = (recipeId) => {
+    setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe.id !== recipeId));
+  };
+
+  return {
+    favoriteRecipes,
+    addFavoriteRecipe,
+    removeFavoriteRecipe,
+  };
+};
 
 const Home = () => {
-  const favoriteRecipes = useSelector(state => state.recipes.favoriteRecipes);
+  const { favoriteRecipes } = useFavoriteRecipes();
 
   return (
     <View style={styles.container}>
@@ -48,6 +65,7 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+
 
 
 /* Notifications.setNotificationHandler({
