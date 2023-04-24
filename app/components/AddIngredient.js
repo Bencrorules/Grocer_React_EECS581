@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Keyboard } from 'react-native';
 
-const AddIngredient = ({ addIngredient }) => {
-  const [ingredient, setIngredient] = useState('');
+export const ingredientItems = {}
+export const setIngredientItems = {}
+
+const AddIngredient = ({  }) => {
+  const [ingredient, setIngredient] = useState();
+  
 
   const handleInputChange = (text) => {
     setIngredient(text);
   };
 
   const handleAddIngredient = () => {
-    addIngredient(ingredient);
+    Keyboard.dismiss();
+    setIngredientItems([...ingredientItems, ingredient]);
+    setIngredient(null);
     setIngredient('');
   };
 
